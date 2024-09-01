@@ -1,16 +1,15 @@
 {
   "name": "spotify-lyrics-app",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "express": "^4.19.2",
-    "node-fetch": "^3.3.2"
+    "axios": "^1.7.7",
+    "express": "^4.18.1",
+    "node-fetch": "^3.0.0"
   }
 }
