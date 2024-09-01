@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Lyrics App - Lyrics Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            background-color: #191414;
+            color: #fff;
+            text-align: center;
+        }
+        .header {
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        .header p {
+            margin: 5px 0 0;
+            font-size: 1.2rem;
+            color: #1DB954;
+        }
+        .lyrics-container {
+            margin-top: 20px;
+            width: 90%;
+            max-width: 600px;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            overflow-y: auto;
+            max-height: 60vh;
+        }
+        .lyrics-container p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .control-button {
+            margin: 0 10px;
+            background-color: #1DB954;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .control-button:hover {
+            background-color: #1ed760;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+        <h2 id="song-title">Song Title</h2>
+        <p id="artist-name">Artist Name</p>
+    </div>
+    <div class="lyrics-container" id="lyrics">
+        <!-- Lyrics will be dynamically loaded here -->
+        <p>Loading lyrics...</p>
+    </div>
+    <div class="controls">
+        <!-- Optional playback controls -->
+        <button class="control-button" id="prev">Previous</button>
+        <button class="control-button" id="play-pause">Play/Pause</button>
+        <button class="control-button" id="next">Next</button>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+          try {
+              const response = await fetch('/lyrics?access_token=YOUR_ACCESS_TOKEN'); // Replace with the actual access token
+              const data = await response.json();
+      
+              document.getElementById('song-title').textContent = data.trackName;
+              document.getElementById('artist-name').textContent = data.artistName;
+              document.getElementById('lyrics').innerHTML = data.lyricsHtml || '<p>Lyrics not found.</p>';
+          } catch (error) {
+              console.error('Error fetching lyrics:', error);
+          }
+      });
+    </script>
+      
+  </body>
+</html>
